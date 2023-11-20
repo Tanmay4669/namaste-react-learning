@@ -50,7 +50,7 @@
 
 3. In Defer HTML Parsing, html parsing goes on, and scripts are fetched in asyn manner i.e. parallely and will start the execution after the completion of the html parsing.
 
-    ![Alt text](image.png)
+<img src="./images/image1_Assignment1.png" alt="Parsing" />
 
 4. <span style='color:red'>Async attribute dos not guarantee the order of execution of the scripts. But Defer does guarantee. So Defer is Preferable. </span>
 
