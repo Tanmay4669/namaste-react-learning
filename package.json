@@ -4,7 +4,8 @@
   "description": "Learning",
   "main": "App.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start":"parcel index_React.html"
   },
   "repository": {
     "type": "git",
