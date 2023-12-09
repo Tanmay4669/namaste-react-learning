@@ -7,7 +7,6 @@ import ReactDOM from "react-dom/client";
 
 // console.log(heading); //object
 
-
 {
   /* <div id="parent">
     <div id="child1">
