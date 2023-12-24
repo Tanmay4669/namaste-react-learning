@@ -1,12 +1,41 @@
 import RestaurantCard from "./RestaurantCard";
-import resList from "../utils/mockData";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Shimmer from "./Shimmer";
 
 //not using keys (not acceptable) <<<<<<<<  index as keys <<<<<< unique ids (best practice)
 const Body = () => {
-  const [listOfRestaurants, setListOfRestaurants] = useState(resList);
+  const [listOfRestaurants, setListOfRestaurants] = useState([]);
 
-  return (
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    const data = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.5204303&lng=73.8567437&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+    );
+
+    const json = await data.json();
+
+    // console.log(
+    //   json.data.cards[5].card.card.gridElements.infoWithStyle.restaurants
+    // );
+
+    console.log(json);
+
+    setListOfRestaurants(
+      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+  };
+
+  //Conditional Rendering =  Rendering according to condition
+  // if (listOfRestaurants.length === 0) {
+  //   return <Shimmer />;
+  // }
+
+  return listOfRestaurants.length === 0 ? (
+    <Shimmer />
+  ) : (
     <div className="body">
       <div className="m-4">
         <button
