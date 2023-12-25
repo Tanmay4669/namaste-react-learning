@@ -5,6 +5,9 @@ import Shimmer from "./Shimmer";
 //not using keys (not acceptable) <<<<<<<<  index as keys <<<<<< unique ids (best practice)
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     fetchData();
@@ -26,6 +29,9 @@ const Body = () => {
     setListOfRestaurants(
       json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
+    setFilteredRestaurants(
+      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
   };
 
   //Conditional Rendering =  Rendering according to condition
@@ -37,7 +43,31 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="m-4">
+      <div className="m-4 filter flex">
+        <div className="search">
+          <input
+            className="boder-black border-2 py-1 px-4 mx-4"
+            type="text"
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
+          ></input>
+          <button
+            className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded mr-5"
+            onClick={() => {
+              console.log(searchText);
+
+              const filteredRestaurants = listOfRestaurants.filter((res) =>
+                res.info.name.toLowerCase().includes(searchText.toLowerCase())
+              );
+
+              setFilteredRestaurants(filteredRestaurants);
+            }}
+          >
+            Search
+          </button>
+        </div>
         <button
           className=" bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded"
           onClick={() => {
@@ -51,7 +81,7 @@ const Body = () => {
         </button>
       </div>
       <div className="res-container flex flex-wrap">
-        {listOfRestaurants.map((restaurant) => (
+        {filteredRestaurants.map((restaurant) => (
           <RestaurantCard key={restaurant.info.id} resData={restaurant} />
         ))}
       </div>
