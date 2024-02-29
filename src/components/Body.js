@@ -2,6 +2,7 @@ import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 //not using keys (not acceptable) <<<<<<<<  index as keys <<<<<< unique ids (best practice)
 const Body = () => {
@@ -9,6 +10,8 @@ const Body = () => {
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
   const [searchText, setSearchText] = useState("");
+
+  const onlineStatus = useOnlineStatus();
 
   useEffect(() => {
     fetchData();
@@ -35,6 +38,14 @@ const Body = () => {
   // if (listOfRestaurants.length === 0) {
   //   return <Shimmer />;
   // }
+
+  if (!onlineStatus) {
+    return (
+      <h1 className="font-bold text-3xl p-8">
+        No Internet!! Please check your Internet Connection
+      </h1>
+    );
+  }
 
   return listOfRestaurants?.length === 0 ? (
     <Shimmer />

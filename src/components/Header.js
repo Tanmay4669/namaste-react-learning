@@ -1,9 +1,12 @@
 import { useState } from "react";
 import logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
+
+  const onlineStatus = useOnlineStatus();
 
   return (
     <div className="flex justify-between border-b-2 border-black ">
@@ -16,6 +19,7 @@ const Header = () => {
 
       <div>
         <ul className="flex p-4 m-4 justify-between">
+          <li className="m-4">Online Status: {onlineStatus ? "🟢" : "🔴"}</li>
           <li className="m-4 cursor-pointer">
             <Link to="/">Home</Link>
           </li>
@@ -24,6 +28,9 @@ const Header = () => {
           </li>
           <li className="m-4 cursor-pointer">
             <Link to="/contact">Contact Us</Link>
+          </li>
+          <li className="m-4 cursor-pointer">
+            <Link to="/grocery">Grocery</Link>
           </li>
           <li className="m-4 cursor-pointer"> Cart</li>
           <button
