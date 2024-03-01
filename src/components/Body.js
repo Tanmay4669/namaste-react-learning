@@ -50,11 +50,11 @@ const Body = () => {
   return listOfRestaurants?.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className="body">
-      <div className="m-4 filter flex">
+    <div className="body mt-14 mx-4">
+      <div className="m-4 filter flex mb-8">
         <div className="search">
           <input
-            className="boder-black border-2 py-1 px-4 mx-4"
+            className="border-solid border-black border-2 py-1 px-4 mx-4 border-r-2"
             type="text"
             value={searchText}
             onChange={(e) => {
@@ -62,7 +62,7 @@ const Body = () => {
             }}
           ></input>
           <button
-            className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded mr-5"
+            className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-lg mr-5"
             onClick={() => {
               console.log(searchText);
 
@@ -77,7 +77,7 @@ const Body = () => {
           </button>
         </div>
         <button
-          className=" bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded"
+          className=" bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-lg"
           onClick={() => {
             const filteredList = listOfRestaurants.filter(
               (res) => res.info.avgRating > 4
