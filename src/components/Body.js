@@ -1,8 +1,9 @@
 import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 //not using keys (not acceptable) <<<<<<<<  index as keys <<<<<< unique ids (best practice)
 const Body = () => {
@@ -25,7 +26,7 @@ const Body = () => {
 
     const json = await data.json();
 
-    console.log(json);
+    //console.log(json);
 
     setListOfRestaurants(
       json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants
@@ -48,6 +49,8 @@ const Body = () => {
     );
   }
 
+  const { loggedInUser, setUserName } = useContext(UserContext);
+
   return listOfRestaurants?.length === 0 ? (
     <Shimmer />
   ) : (
@@ -65,7 +68,7 @@ const Body = () => {
           <button
             className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-lg mr-5"
             onClick={() => {
-              console.log(searchText);
+              // console.log(searchText);
 
               const filteredRestaurants = listOfRestaurants.filter((res) =>
                 res.info.name.toLowerCase().includes(searchText.toLowerCase())
@@ -88,6 +91,17 @@ const Body = () => {
         >
           Top Rated Restaurants
         </button>
+        <div className="mx-6">
+          <label className="font-semibold">Username: </label>
+          <input
+            className="border-solid border-black border-2 py-1 px-4 mx-4 border-r-2"
+            type="text"
+            value={loggedInUser}
+            onChange={(e) => {
+              setUserName(e.target.value);
+            }}
+          ></input>
+        </div>
       </div>
       <div className="res-container flex flex-wrap">
         {filteredRestaurants?.map((restaurant) => (

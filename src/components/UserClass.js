@@ -16,22 +16,22 @@ class UserClass extends React.Component {
 
   async componentDidMount() {
     //console.log(this.props.name, " Did Mount");
-    const data = await fetch("https://api.github.com/users/akshaymarch7");
+    const data = await fetch("https://api.github.com/users/Tanmay4669");
     const json = await data.json();
 
     this.setState({
       userInfo: json,
     });
 
-    console.log(json);
+    //console.log(json);
   }
 
   componentDidUpdate() {
-    console.log("Component Did Update");
+    //console.log("Component Did Update");
   }
 
   componentWillUnmount() {
-    console.log("Component Will Unmount");
+    // console.log("Component Will Unmount");
   }
 
   render() {
