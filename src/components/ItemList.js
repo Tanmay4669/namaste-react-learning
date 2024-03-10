@@ -1,7 +1,16 @@
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice";
 import { CDN_URL } from "../utils/constants";
 
 const ItemList = ({ items }) => {
   // console.log(items);
+
+  const dispatch = useDispatch();
+
+  const handleAddItem = (item) => {
+    //Dispatch an Action
+    dispatch(addItem(item));
+  };
 
   return (
     <div>
@@ -29,7 +38,10 @@ const ItemList = ({ items }) => {
               className="w-full h-auto"
             />
             <div className="flex justify-center -mt-4">
-              <button className="p-2 flex items-center justify-center w-1/2 rounded-lg bg-black text-white shadow-lg">
+              <button
+                className="p-2 flex items-center justify-center w-1/2 rounded-lg bg-black text-white shadow-lg"
+                onClick={() => handleAddItem(item)}
+              >
                 Add +
               </button>
             </div>
