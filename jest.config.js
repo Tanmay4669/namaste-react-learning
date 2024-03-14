@@ -3,6 +3,8 @@
  * https://jestjs.io/docs/configuration
  */
 
+const path = require("path");
+
 /** @type {import('jest').Config} */
 const config = {
   // All imported modules in your tests should be mocked automatically
@@ -146,6 +148,11 @@ const config = {
 
   // The test environment that will be used for testing
   testEnvironment: "jsdom",
+
+  transform: {
+    "\\.(js|jsx|ts|tsx)$": "babel-jest",
+    "\\.(jpg|jpeg|png|gif|svg)$": path.join(__dirname, "fileTransformer.js"),
+  },
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},
