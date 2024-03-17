@@ -60,6 +60,7 @@ const Body = () => {
           <input
             className="border-solid border-black border-2 py-1 px-4 mx-4 border-r-2"
             type="text"
+            data-testid="searchInput"
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);

@@ -9,7 +9,10 @@ const RestaurantCard = (props) => {
     resData?.info;
 
   return (
-    <div className="res-card m-4 bg-slate-200 w-[250px] h-auto cursor-pointer hover:border-black hover:bg-slate-300 rounded-lg shadow-lg">
+    <div
+      data-testid="resCard"
+      className="res-card m-4 bg-slate-200 w-[250px] h-auto cursor-pointer hover:border-black hover:bg-slate-300 rounded-lg shadow-lg"
+    >
       <div className="flex justify-center pt-4">
         <img
           src={CDN_URL + cloudinaryImageId}
